@@ -63,7 +63,7 @@ class EventDashboard extends Component {
   };
 
   handleFormOpen = () => {
-    this.setState({ isOpen: true });
+    this.setState({ selectedEvent: null, isOpen: true });
   };
 
   handleCancel = () => {
@@ -87,10 +87,11 @@ class EventDashboard extends Component {
   };
 
   render() {
+    const {selectedEvent} = this.state;
     return (
       <Grid>
         <Grid.Column width={10}>
-          <EventList events={this.state.events} />
+          <EventList onEventEdit={this.handleEditEvent} events={this.state.events} />
         </Grid.Column>
         <Grid.Column width={6}>
           <Button
@@ -100,6 +101,7 @@ class EventDashboard extends Component {
           />
           {this.state.isOpen && (
             <EventForm
+              selectedEvent={selectedEvent}
               createEvent={this.handleCreateEvent}
               cancelForm={this.handleCancel}
             />
